@@ -7,4 +7,10 @@
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\logs\" />
+    <Folder Include="wwwroot\systems\uploads\" />
+  </ItemGroup>
+
 </Project>
