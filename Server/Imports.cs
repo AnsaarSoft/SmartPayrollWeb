@@ -1,4 +1,5 @@
-﻿global using SharedLibrary;
+﻿global using Microsoft.EntityFrameworkCore;
+global using Server.Repository.Interface;
 global using SharedLibrary.Models;
-global using Microsoft.EntityFrameworkCore;
+
 
