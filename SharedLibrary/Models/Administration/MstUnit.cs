@@ -8,7 +8,7 @@
         [StringLength(50)]
         public string Alias { get; set; } = string.Empty;
 
-        public int ClientId { get; set; }
+        public MstCompany? Company { get; set; }
 
         public string Status { get; set; } = string.Empty;
 
