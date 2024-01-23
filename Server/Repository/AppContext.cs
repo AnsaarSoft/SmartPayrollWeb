@@ -1,4 +1,6 @@
-﻿namespace Server.Repository
+﻿using SharedLibrary.Models.Employee;
+
+namespace Server.Repository
 {
     public class AppContext : DbContext
     {
