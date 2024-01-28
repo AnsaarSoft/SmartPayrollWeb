@@ -1,16 +1,38 @@
-﻿using SharedLibrary.Models.Employee;
+﻿using Server.Repository.Service.Employee;
+using SharedLibrary.Models.Employee;
 
 namespace Server.Repository
 {
-    public class AppContext : DbContext
+    public class AppDBContext : DbContext
     {
-        public AppContext(DbContextOptions<AppContext> options) :base(options)
+        public AppDBContext(DbContextOptions<AppDBContext> options) :base(options)
         {
                 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<MstUser>().HasData(
+                new MstUser { 
+                    Id = 1,
+                    UserCode = "manager",
+                    Password = "super@123",
+                    UserType = 1,
+                    Employee = null,
+                    Unit = null,
+                    Company = null,
+                    CreatedBy = "Auto",
+                    UpdatedBy = "Auto",
+                    cAppStamp = "Auto",
+                    uAppStamp = "Auto",
+                });
+        }
+
         #region All Tables
-        public DbSet<MstUser> MstUser { get; set; }
+        public DbSet<MstUser> MstUsers { get; set; }
+        public DbSet<MstEmployee> MstEmployees { get; set;}
+
 
         #endregion
 

@@ -2,29 +2,96 @@
 {
     public class MstUserService : IMstUser
     {
-        public Task<bool> AddUser(MstUser oRecord)
+        private readonly AppDBContext odb;
+        public MstUserService(AppDBContext _dbcontext) 
         {
-            throw new NotImplementedException();
+            odb = _dbcontext;
         }
 
-        public Task<bool> DeleteUser(int id)
+        public async Task<bool> AddUser(MstUser oRecord)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if(oRecord is null) { return false; } 
+                odb.MstUsers.Add(oRecord);
+                await odb.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public async Task<bool> UpdateUser(MstUser oRecord)
+        {
+            try
+            {
+                if (oRecord is null) { return false; }
+                odb.MstUsers.Update(oRecord);
+                await odb.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public async Task<bool> DeleteUser(int id)
+        {
+            try
+            {
+                if (id == 0)
+                {
+                    return false;
+                }
+                var oRecord = await (from a in odb.MstUsers
+                               where a.Id == id
+                               select a).FirstOrDefaultAsync();
+                if (oRecord is null) { return false; }
+                oRecord.flgDelete = true;
+                oRecord.flgActive = false;
+                await odb.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
-        public Task<MstUser> GetUser(int id)
+        public async Task<MstUser?> GetUser(int id)
         {
-            throw new NotImplementedException();
+            MstUser? oRecord = new();
+            try
+            {
+                if (id == 0) { return oRecord; }
+                oRecord = await (from a in odb.MstUsers
+                                    where a.Id == id
+                                    select a).FirstOrDefaultAsync();
+                
+                return oRecord;
+            }
+            catch (Exception ex)
+            {
+                return oRecord;
+            }
         }
 
-        public Task<List<MstUser>> GetUserList()
+        public async Task<List<MstUser>> GetUserList()
         {
-            throw new NotImplementedException();
+            List<MstUser> oRecords = new();
+            try
+            {
+                oRecords = await (from a in odb.MstUsers
+                                  select a).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return oRecords;
         }
 
-        public Task<bool> UpdateUser(MstUser oRecord)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
