@@ -17,7 +17,7 @@ namespace Server.Repository
                 new MstUser { 
                     Id = 1,
                     UserCode = "manager",
-                    Password = "super@123",
+                    Password = "kuch bhi likh lo per login nahi ker pao gay",
                     UserType = 1,
                     Employee = null,
                     Unit = null,

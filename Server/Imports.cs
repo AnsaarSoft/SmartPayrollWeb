@@ -11,6 +11,8 @@ global using SharedLibrary.Models.Employee;
 global using SharedLibrary.Models.Employee.Master;
 global using NLog;
 global using NLog.Web;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Mvc;
 
 
 

@@ -8,9 +8,39 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Components\Pages\AccountManagement\Login.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\logs\" />
     <Folder Include="wwwroot\systems\uploads\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.3.1" />
+    <PackageReference Include="MudBlazor" Version="6.15.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Components\Pages\AccountManagement\Login.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Components\Pages\AccountManagement\Login.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\Pages\AccountManagement\Login.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharedLibrary\SharedLibrary.csproj" />
   </ItemGroup>
 
 </Project>

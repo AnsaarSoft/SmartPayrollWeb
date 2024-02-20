@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Server.Controllers.Employee
 {
@@ -7,12 +9,16 @@ namespace Server.Controllers.Employee
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly IMstEmployee repo;
+        private readonly IMstEmployee repoEmployee;
+        private readonly IMstUser repoUser;
         private readonly ILogger<EmployeeController> logger;
-        public EmployeeController(IMstEmployee employee, ILogger<EmployeeController> log)
+        public EmployeeController(IMstEmployee employee, IMstUser user, ILogger<EmployeeController> log)
         {
-            repo = employee;
+            repoEmployee = employee;
+            repoUser = user;
             logger = log;
         }
+
+        
     }
 }

@@ -3,9 +3,11 @@
     public class MstUserService : IMstUser
     {
         private readonly AppDBContext odb;
-        public MstUserService(AppDBContext _dbcontext) 
+        private readonly ILogger<MstUserService> logger;
+        public MstUserService(AppDBContext context, ILogger<MstUserService> log) 
         {
-            odb = _dbcontext;
+            odb = context;
+            logger = log;
         }
 
         public async Task<bool> AddUser(MstUser oRecord)
@@ -58,7 +60,6 @@
                 return false;
             }
         }
-
         public async Task<MstUser?> GetUser(int id)
         {
             MstUser? oRecord = new();
@@ -76,7 +77,24 @@
                 return oRecord;
             }
         }
+        public async Task<MstUser?> GetUser(string usercode)
+        {
+            MstUser? oRecord = new();
+            try
+            {
+                if (string.IsNullOrEmpty(usercode)) { return oRecord; }
+                oRecord = await (from a in odb.MstUsers
+                                 where a.UserCode == usercode
+                                 select a).FirstOrDefaultAsync();
 
+                return oRecord;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "getuser error on database");
+                return oRecord;
+            }
+        }
         public async Task<List<MstUser>> GetUserList()
         {
             List<MstUser> oRecords = new();

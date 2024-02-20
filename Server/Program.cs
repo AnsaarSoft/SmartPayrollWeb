@@ -1,4 +1,4 @@
-var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+var logger = LogManager.Setup().LoadConfigurationFromFile().GetCurrentClassLogger();
 try
 {
 
